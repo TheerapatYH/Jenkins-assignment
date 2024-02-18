@@ -1,17 +1,17 @@
 def vm2=[:]
-vm2.name = 'vm2'
-vm2.host = '192.168.56.103'
-vm2.user = 'adminadmin'
+vm2.name = 'vm2sv'
+vm2.host = '192.168.56.101'
+vm2.user = 'theerapat'
 vm2.port = 22
-vm2.password = '12345678'
+vm2.password = '625735'
 vm2.allowAnyHosts = true
 
 def vm3=[:]
-vm3.name = 'vm3'
-vm3.host = '192.168.56.104'
-vm3.user = 'adminadmin'
+vm3.name = 'vm3sv'
+vm3.host = '192.168.56.102'
+vm3.user = 'theerapat'
 vm3.port = 22
-vm3.password = '12345678'
+vm3.password = '625735'
 vm3.allowAnyHosts = true
 
 
@@ -24,10 +24,10 @@ pipeline {
                 echo 'Testing..'
                  script {
                     echo 'git pull'
-                    sshCommand(remote: vm2, command: 'cd api-jenkins-assignment/ && git pull')
+                    sshCommand(remote: vm2, command: 'cd Jenkins-assignment/ && git pull')
                 
                     echo 'Run unit test'
-                    sshCommand(remote: vm2, command: 'cd api-jenkins-assignment/ && python3 unit_test.py')
+                    sshCommand(remote: vm2, command: 'cd Jenkins-assignment/ && python3 unit_test.py')
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building..'
-                    sshCommand(remote: vm2, command: "cd api-jenkins-assignment/ && echo '12345678' | sudo -S docker-compose up -d --build")
+                    sshCommand(remote: vm2, command: "cd Jenkins-assignment/ && echo '625735' | sudo -S docker-compose up -d --build")
                 }
             }
         }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     echo 'gitlab login & push'
-                    sshCommand(remote: vm2, command: "cd api-jenkins-assignment/ \
+                    sshCommand(remote: vm2, command: "cd Jenkins-assignment/ \
                     && echo '12345678' | sudo -S docker login registry.gitlab.com \
                     && echo 'Jimmymonster' \
                     && echo 'glpat-f4dTxzyDBemNLeNr8MZj' \
